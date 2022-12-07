@@ -2,37 +2,20 @@
 #include<stdio.h>
 int main()
 {
-	int m,a;
-	scanf("%d",&m);
-	if (m >= 90 && m <= 100)
-		a = 1;
-	else if (m >= 80 && m < 90)
-		a = 2;
-	else if (m >= 70 && m < 80)
-		a = 3;
-	else if (m >= 60 && m < 70)
-		a = 4;
-	else if (m >= 0 && m <= 60)
-		a = 5;
-	else
-		printf("输入错误");
-	switch (a)
+	int ret=0,ch=0;
+	char password[20] = { 0 };
+	printf("请输入用户密码:>");
+	scanf("%s",&password);
+	while ((ch = getchar()) != '\n')
 	{
-	case 1:
-		printf("A");
-		break;
-	case 2:
-		printf("B");
-		break;
-	case 3:
-		printf("C");
-		break;
-	case 4:
-		printf("D");
-		break;
-	case 5:
-		printf("E");
-		break;
+		;
 	}
+	printf("请确认（Y/N）:");
+	ret = getchar();
+	if (ret == 'Y')
+		printf("确认成功");
+	else
+		printf("放弃确认");
+
 	return 0;
 }
