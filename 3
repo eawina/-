@@ -1,0 +1,228 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+// #include<>
+#define data char
+struct TelePhoneUser {
+    data TelePhoneUser_NAME[20]; //个人姓名unsigned
+
+    data TelePhoneUser_UNIT[20]; //单位
+
+    data TelePhoneUser_NUMBER[20]; //电话信息
+
+}tpu[100];
+/**
+ * @brief
+ * 7、通讯录系统：制作一个通讯录，每个记录可输入个人姓名、单位和电话信息，
+ *    并实现添加、查询、删除、显示、修改功能，要求有类似如下界面：
+*************************************************************
+                欢迎使用本通讯录系统！
+请选择“0～4”
+1：插入                   2：查询
+3：删除                   4：显示
+0：退出
+************************************************************
+ *
+ * @return int
+ *
+ */
+int i = 0;
+int ch = 0;
+
+//用全局变量i来控制增、删
+
+void Insert();
+void query();
+void removed();
+void display();
+//0~4各模块的功能独立成函数
+
+/**
+ * @brief
+ * 插入通讯录联系人
+ */
+void Insert()
+{
+    // int i = 0;
+    // for(i = 0; i < 100; i++){
+    //     // for(int j = 0; j < 20; j++)       
+    //         //如果当前位置元素不为空，执行下一次循环
+    //     if(tpu[i].TelePhoneUser_NAME != NULL)
+    //        continue;
+    //        //如果为空说明到头了，直接使用goto到下方代码
+    //     else if (tpu[i].TelePhoneUser_NAME == NULL)
+    //         goto outcode;
+
+    // }
+    // outcode:
+    printf("请输入姓名:");
+    scanf("%s", &tpu[i].TelePhoneUser_NAME);
+    // printf("%s",tpu[i].TelePhoneUser_NAME);
+    printf("请输入单位:");
+    scanf("%s", &tpu[i].TelePhoneUser_UNIT);
+    // printf("%s",tpu[i].TelePhoneUser_UNIT);
+    printf("请输入手机号:");
+    scanf("%s", &tpu[i].TelePhoneUser_NUMBER);
+    // printf("%s",tpu[i].TelePhoneUser_NUMBER);
+    while ((ch = getchar()) != '\n')
+    {
+        ;
+    }
+
+}
+
+
+/**
+ * @brief
+ * 查询当前通讯录信息
+ */
+void query()
+{
+    int index = 2;
+    printf("请输入查询人的姓名：");
+    char queryName[10];
+    scanf("%s", &queryName);
+
+    for (int i = 0; i < 100; i++)
+    {
+        if (strcmp(tpu[i].TelePhoneUser_NAME, queryName) == 0)
+        {
+            index = i;
+        }
+    }
+    //利用for循环一个个查找并将下标赋值给index
+    printf("姓名：");
+    printf("%s", tpu[index].TelePhoneUser_NAME);
+    printf("\n单位: ");
+    printf("%s", tpu[index].TelePhoneUser_UNIT);
+    printf("\n手机号: ");
+    printf("%s", tpu[index].TelePhoneUser_NUMBER);
+    //打印下标所代表的信息
+    printf("\n");
+    while ((ch = getchar()) != '\n')
+    {
+        ;
+    }
+    //清除缓存区
+}
+
+
+/**
+ * @brief
+ * 删除联系人
+ */
+void removed()
+{
+    printf("请输入您要删除的联系人姓名：");
+    char name[15];
+    scanf("%s", &name);
+    for (int j = 0; j < 100; j++)
+    {
+        //删除完以后为每个下标进行前移操作，防止此位置的元素为空导致其他程序无法正常运行
+        if (tpu[j].TelePhoneUser_NAME == name)
+        {
+            tpu[j] = tpu[j + 1];
+
+        }
+        tpu[j] = tpu[j + 1];
+        //当程序执行到最后时，直接break跳出，防止越界
+        if (j == 99)
+        {
+            break;
+        }
+    }
+    while ((ch = getchar()) != '\n')
+    {
+        ;
+    }
+}
+
+
+/**
+ * @brief
+ * 展示所有联系人信息
+ */
+void display()
+{
+    //找出数组最后一个存在数据的元素下标index
+    // int index = 0;
+    // for(index = 0; index < 100; index++){
+    //     for(int j = 0; j < 20; j++)
+    //     {
+    //         //如果当前位置元素不为空，执行下一次循环
+    //     if(tpu[index].TelePhoneUser_NAME[j] != '\0')
+    //        {
+    //            continue;
+    //        } 
+    //        //如果为空说明到头了，直接使用goto到下方代码
+    //     else if (tpu[index].TelePhoneUser_NAME[j] == '\0')
+    //         goto anotherCode;
+    //     }
+    // }
+    //遍历结构体数组，打印所有数组中的数据
+
+    //通过下标来控制显示当前有多少联系人就显示多少人
+    for (int j = 0; j < i; j++)
+    {
+        printf("姓名：");
+        printf("%s", tpu[j].TelePhoneUser_NAME);
+        printf("\n单位: ");
+        printf("%s", tpu[j].TelePhoneUser_UNIT);
+        printf("\n手机号: ");
+        printf("%s", tpu[j].TelePhoneUser_NUMBER);
+        printf("\n");
+        printf("--------------\n");
+    }
+    while ((ch = getchar()) != '\n')
+    {
+        ;
+    }
+}
+
+
+int main()
+{
+    printf("\t\t  欢迎使用本通讯录系统!\n");
+    printf("请选择“0~4”\n");
+    printf("1: 插入\t\t\t\t\t\t");
+    printf("2: 查询\n");
+    printf("3: 删除\t\t\t\t\t\t");
+    printf("4: 显示\n");
+    printf("0: 退出\n");
+
+    char command;
+    data TelePhoneUser_NAME[20];
+    //用死循环控制用户输入的command，防止用户输入错误的command导致系统出错
+    while (1)
+    {
+        printf("请输入命令");
+        scanf("%c", &command);
+        //用switch来判断用户输入的命令
+        switch (command)
+        {
+        case '1':
+            Insert();
+            i++;
+            // printf("%s", tpu[0].TelePhoneUser_NAME);
+            break;
+        case '2':
+            query();
+            break;
+        case '3':
+            removed();
+            printf("删除成功！\n");
+            i--;//删除以后用下标减一
+            break;
+        case '4':
+            display();
+            break;
+        case '0':
+            //exit函数直接结束当前运行的程序
+            exit(0);
+            break;
+        default:
+            printf("命令出错，请检查~");
+        }  
+    }
+}
